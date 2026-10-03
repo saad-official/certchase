@@ -1,6 +1,6 @@
 # CertChase
 
-**Certificates of insurance, tracked and chased.** CertChase keeps a roster of your subcontractors and vendors, reads each certificate of insurance with a vision model, judges it against the coverage your contract requires using plain rules, and chases brokers for corrections and renewals with emails you approve.
+**Certificates of insurance, tracked and chased.** Live at [getcertchase.vercel.app](https://getcertchase.vercel.app). CertChase keeps a roster of your subcontractors and vendors, reads each certificate of insurance with a vision model, judges it against the coverage your contract requires using plain rules, and chases brokers for corrections and renewals with emails you approve.
 
 Part of the [Vibe Build Series](https://github.com/saad-official/vibe-build-series): real products for small businesses, built in public on free tiers.
 
@@ -33,3 +33,10 @@ Schema lives in `supabase/migrations`; apply with `pnpm exec supabase link --pro
 ## Docs
 
 - [Spec](docs/spec.md) · [Plan](docs/plan.md) · [Decisions](docs/decisions/)
+
+## Try the demo
+
+1. Sign up (email and password; no confirmation email needed).
+2. Vendors → **Load demo vendors**. Eight synthetic subcontractors are created and seven ACORD 25-style certificates are rendered, uploaded and read. With a Gemini key configured the vision model does the reading; without one the known fixture is used, and the certificate page shows the two side by side.
+3. Open a deficient vendor to see the gaps the rules found, then Queue → approve the drafted broker email. In demo mode nothing leaves the app: the Outbox shows what would have been sent.
+4. Requirements → change a limit and watch the roster re-evaluate.
