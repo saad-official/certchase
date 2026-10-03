@@ -33,7 +33,7 @@ export default async function SignInPage({
   return (
     <Card className="shadow-card">
       <CardHeader>
-        <CardTitle className="font-display text-2xl">Welcome back</CardTitle>
+        <CardTitle className="text-2xl font-semibold tracking-tight">Welcome back</CardTitle>
         <CardDescription>Sign in to see what CertChase has drafted for you.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">

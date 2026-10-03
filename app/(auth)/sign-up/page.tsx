@@ -18,9 +18,9 @@ export default function SignUpPage() {
   return (
     <Card className="shadow-card">
       <CardHeader>
-        <CardTitle className="font-display text-2xl">Start chasing less</CardTitle>
+        <CardTitle className="text-2xl font-semibold tracking-tight">Stop finding lapses after the claim</CardTitle>
         <CardDescription>
-          Free for up to 10 active invoices. No card needed.
+          Free for up to 10 vendors. No card needed.
         </CardDescription>
       </CardHeader>
       <CardContent>

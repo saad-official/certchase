@@ -14,7 +14,7 @@ export function SignUpForm() {
     return (
       <div className="grid gap-3 text-center" role="status">
         <MailCheck className="mx-auto size-8 text-moss" aria-hidden />
-        <h2 className="font-display text-xl">Check your email</h2>
+        <h2 className="text-xl font-semibold tracking-tight">Check your email</h2>
         <p className="text-sm text-muted-foreground">
           We sent a confirmation link to{" "}
           <span className="font-medium text-foreground">{state.values?.email}</span>.
