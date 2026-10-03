@@ -11,7 +11,7 @@ export type AgentEventInput = {
   actor: Actor;
   /** Short dotted name, e.g. "draft.created", "touch.approved", "reply.classified". */
   type: string;
-  entityType?: "invoice" | "touch" | "reply" | "cadence" | "customer" | "organization";
+  entityType?: "vendor" | "certificate" | "touch" | "cadence" | "template" | "organization";
   entityId?: string | null;
   input?: Json;
   output?: Json;
