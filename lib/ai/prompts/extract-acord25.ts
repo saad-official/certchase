@@ -13,7 +13,7 @@ Rules:
 - Limits: gl eachOccurrenceCents = "EACH OCCURRENCE", aggregateCents = "GENERAL AGGREGATE"; auto combinedSingleLimitCents = "COMBINED SINGLE LIMIT"; wc eachAccidentCents = "E.L. EACH ACCIDENT"; umbrella eachOccurrenceCents = "EACH OCCURRENCE".
 - Endorsements: additionalInsured is true if the ADDL INSD column is marked for that policy OR the description of operations says the certificate holder is an additional insured; waiverOfSubrogation is true if the SUBR WVD column is marked or the description says waiver of subrogation applies; primaryNonContributory is true only if the description says primary and non-contributory (or primary/noncontributory). Use null when the document gives no signal.
 - noticeOfCancellationDays: the number of days of notice stated in the cancellation section or description (e.g. "30 days notice"); null if none stated.
-- fieldConfidence: for each field you populated, your confidence 0..1 that you read it correctly (use keys like "insuredName", "policies[0].expirationDate", "policies[1].limits.eachOccurrenceCents").
+- fieldConfidence: for each field you populated, your confidence 0..1 that you read it correctly (use dotted keys like "insuredName", "policies.0.expirationDate", "policies.1.limits.eachOccurrenceCents").
 - evidence: for the same keys, a short verbatim quote (max 80 chars) from the document that supports the value.
 - If the document is not a certificate of insurance, return an empty policies array and set insuredName to the most prominent name with low confidence.`;
 

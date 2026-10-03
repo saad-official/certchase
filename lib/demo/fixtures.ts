@@ -69,10 +69,10 @@ function base(
     "issueDate",
     "noticeOfCancellationDays",
     ...policies.flatMap((_, i) => [
-      `policies[${i}].policyNumber`,
-      `policies[${i}].effectiveDate`,
-      `policies[${i}].expirationDate`,
-      `policies[${i}].limits`,
+      `policies.${i}.policyNumber`,
+      `policies.${i}.effectiveDate`,
+      `policies.${i}.expirationDate`,
+      `policies.${i}.limits`,
     ]),
   ];
   return {
