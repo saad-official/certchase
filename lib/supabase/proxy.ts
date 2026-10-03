@@ -5,11 +5,11 @@ import { publicEnv } from "@/lib/env";
 /** Paths that require a signed-in user. */
 export const PROTECTED_PREFIXES = [
   "/dashboard",
-  "/invoices",
+  "/vendors",
+  "/certificates",
   "/queue",
-  "/inbox",
   "/outbox",
-  "/customers",
+  "/templates",
   "/settings",
   "/billing",
   "/onboarding",

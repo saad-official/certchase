@@ -4,13 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   CreditCard,
-  FileText,
-  Inbox,
+  FileBadge,
+  HardHat,
   LayoutDashboard,
   ListChecks,
   Send,
   Settings,
-  Users,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,11 +19,11 @@ type NavItem = { href: string; label: string; icon: LucideIcon };
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/invoices", label: "Invoices", icon: FileText },
+  { href: "/vendors", label: "Vendors", icon: HardHat },
+  { href: "/certificates", label: "Certificates", icon: FileBadge },
   { href: "/queue", label: "Queue", icon: ListChecks },
-  { href: "/inbox", label: "Inbox", icon: Inbox },
   { href: "/outbox", label: "Outbox", icon: Send },
-  { href: "/customers", label: "Customers", icon: Users },
+  { href: "/templates", label: "Requirements", icon: ShieldCheck },
   { href: "/settings", label: "Settings", icon: Settings },
   { href: "/billing", label: "Billing", icon: CreditCard },
 ];
