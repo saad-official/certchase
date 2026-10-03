@@ -32,3 +32,20 @@ export function hasFallback() {
 export function hasPrimary() {
   return Boolean(optionalEnv("GROQ_API_KEY"));
 }
+
+/**
+ * Vision-capable model for document extraction. Only Gemini on the free
+ * tier can read PDFs and images, so there is no Groq fallback here.
+ */
+export const VISION_MODEL_ID = optionalEnv("AI_VISION_MODEL") ?? "gemini-3.5-flash-lite";
+
+export function visionModel() {
+  const google = createGoogle({
+    apiKey: requireEnv("GOOGLE_GENERATIVE_AI_API_KEY"),
+  });
+  return google(VISION_MODEL_ID);
+}
+
+export function hasVision() {
+  return Boolean(optionalEnv("GOOGLE_GENERATIVE_AI_API_KEY"));
+}

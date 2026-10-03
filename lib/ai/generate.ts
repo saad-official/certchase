@@ -81,3 +81,49 @@ export async function generateStructured<S extends z.ZodType>(
     ? lastError
     : new Error(`All model providers failed for ${req.name}`);
 }
+
+export type FileInput = {
+  /** Raw bytes of the document. */
+  data: Uint8Array;
+  mediaType: "application/pdf" | "image/png" | "image/jpeg";
+  filename?: string;
+};
+
+/**
+ * Structured extraction from a document (PDF or image). Gemini only; throws
+ * AiUnavailableError when no Google key is configured.
+ */
+export async function generateStructuredFromFile<S extends z.ZodType>(
+  req: Omit<StructuredRequest<S>, "prompt"> & { prompt: string; file: FileInput },
+): Promise<{ object: z.infer<S>; meta: CallMeta }> {
+  const { hasVision, visionModel, VISION_MODEL_ID } = await import("@/lib/ai/model");
+  if (!hasVision()) throw new AiUnavailableError("Document extraction needs GOOGLE_GENERATIVE_AI_API_KEY.");
+  const started = Date.now();
+  const result = await generateObject({
+    model: visionModel(),
+    schema: req.schema,
+    instructions: req.instructions,
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "file", data: req.file.data, mediaType: req.file.mediaType, filename: req.file.filename },
+          { type: "text", text: req.prompt },
+        ],
+      },
+    ],
+    temperature: req.temperature ?? 0,
+    maxRetries: 1,
+  });
+  return {
+    object: result.object as z.infer<S>,
+    meta: {
+      model: VISION_MODEL_ID,
+      promptVersion: req.promptVersion,
+      tokensIn: result.usage?.inputTokens ?? 0,
+      tokensOut: result.usage?.outputTokens ?? 0,
+      latencyMs: Date.now() - started,
+      attempts: 1,
+    },
+  };
+}
