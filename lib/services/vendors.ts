@@ -1,6 +1,6 @@
 import "server-only";
 import { logAgentEvent } from "@/lib/ai/log";
-import type { Organization as OrganizationRow, Vendor as VendorRow, VendorOverview } from "@/lib/db/types";
+import type { Organization as OrganizationRow, Vendor as VendorRow, VendorOverview, VendorUpdate } from "@/lib/db/types";
 import { VendorInputSchema, type VendorInput } from "@/lib/domain/types";
 import { getVendorCapacity } from "@/lib/services/plan-limits";
 import { getDefaultTemplate } from "@/lib/services/templates";
@@ -77,7 +77,7 @@ export async function updateVendor(
   userId: string,
 ): Promise<VendorRow> {
   const partial = VendorInputSchema.partial().parse(input);
-  const patch: Record<string, unknown> = {};
+  const patch: VendorUpdate = {};
   if (partial.name !== undefined) patch.name = partial.name;
   if (partial.contactEmail !== undefined) patch.contact_email = partial.contactEmail.toLowerCase();
   if (partial.brokerName !== undefined) patch.broker_name = partial.brokerName?.trim() || null;
