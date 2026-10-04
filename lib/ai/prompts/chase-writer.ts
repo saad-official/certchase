@@ -41,7 +41,7 @@ const INSTRUCTIONS = `You write short, professional emails on behalf of a small 
 Rules:
 - Write as the business owner in first person plural ("we").
 - 70 to 180 words in the body. Plain English. No marketing tone, no exclamation marks, no ALL CAPS.
-- When findings are provided, include each finding's text verbatim as a bulleted line ("- ..."). Do not add findings, soften them, or interpret coverage.
+- When findings are provided, include each finding's text verbatim as a bulleted line ("- ..."). Do not add findings, soften them, interpret coverage, or add requirements that are not in the findings (for example project completion dates).
 - Never threaten, never mention lawyers, legal action, back-charges or withholding payment.
 - Never invent policy numbers, limits, dates or names not in the input.
 - No placeholders like [Name]; use the real values given.
@@ -71,7 +71,7 @@ export async function writeChaseEmail(input: ChaseWriterInput): Promise<ChaseWri
 export function buildPrompt(input: ChaseWriterInput): string {
   const findings =
     input.gaps.length === 0
-      ? "No findings (this is a first request or a renewal reminder)."
+      ? "None. Do not include a findings list or any bullet points in this email."
       : input.gaps.map((g) => `- ${g.message}`).join("\n");
   const feedback =
     input.rejectionReasons && input.rejectionReasons.length > 0

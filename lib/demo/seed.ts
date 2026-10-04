@@ -92,6 +92,14 @@ export async function seedDemoVendors(client: Client, org: OrganizationRow, now 
     }
   }
 
+  // Make the first chase step due right now so "Run agent now" drafts immediately
+  // after loading the demo; later steps follow the planner.
+  await client
+    .from("chase_cadences")
+    .update({ next_run_at: new Date(now.getTime() - 60_000).toISOString() })
+    .eq("org_id", org.id)
+    .eq("status", "active");
+
   await logAgentEvent(client, {
     orgId: org.id,
     actor: "system",
